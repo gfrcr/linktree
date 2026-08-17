@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ============================================================
+     EDIT: title, description, og tags, the profile photo below,
+     and the <a class="link"> blocks. Nothing else needs to change.
+     ============================================================ -->
+    <title>@iamlayzita</title>
+    <meta name="description" content="Todos os meus links em um lugar só." />
+    <meta name="theme-color" content="#EDF4E9" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@iamlayzita" />
+    <meta
+      property="og:description"
+      content="Todos os meus links em um lugar só."
+    />
+    <meta property="og:url" content="https://lay.fyi/" />
+    <meta property="og:image" content="https://seudominio.link/profile.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ---------- Design tokens ---------- */
+      :root {
+        --paper: #fcfefa; /* card surface */
+        --wallpaper: #edf4e9; /* page behind the card */
+        --mint: #dcebd6; /* soft filled shapes */
+        --sage: #a9c6a1; /* borders, secondary */
+        --green: #7ba471; /* primary accent */
+        --green-deep: #4e7247; /* accent text, focus ring */
+        --blush: #f3d9df; /* the rose note, used sparingly */
+        --blush-deep: #d9a0b0;
+        --ink: #3e4b3a; /* body text — deep green, never black */
+        --ink-soft: #7e8f79;
+
+        --font: "Quicksand", system-ui, -apple-system, sans-serif;
+        --unit: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: calc(var(--unit) * 4) calc(var(--unit) * 2);
+        color: var(--ink);
+        font-family: var(--font);
+        font-size: 17px;
+        line-height: 1.5;
+        background-color: var(--wallpaper);
+        background-image:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(123, 164, 113, 0.18) 1.8px,
+            transparent 1.9px
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(217, 160, 176, 0.16) 1.5px,
+            transparent 1.6px
+          ),
+          linear-gradient(170deg, #eff6eb 0%, #e4f0df 55%, #f2f1ea 100%);
+        background-size:
+          28px 28px,
+          28px 28px,
+          100% 100%;
+        background-position:
+          0 0,
+          14px 14px,
+          0 0;
+      }
+
+      /* ---------- Drifting leaves ---------- */
+      .drift {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .drift span {
+        position: absolute;
+        top: -28px;
+        width: 14px;
+        height: 14px;
+        border-radius: 70% 8% 70% 8%;
+        opacity: 0;
+        animation: fall linear infinite;
+      }
+
+      .drift span:nth-child(odd) {
+        background: var(--mint);
+      }
+      .drift span:nth-child(even) {
+        background: var(--blush);
+      }
+
+      .drift span:nth-child(1) {
+        left: 10%;
+        animation-duration: 19s;
+        animation-delay: 0s;
+      }
+      .drift span:nth-child(2) {
+        left: 33%;
+        animation-duration: 24s;
+        animation-delay: 5s;
+      }
+      .drift span:nth-child(3) {
+        left: 57%;
+        animation-duration: 21s;
+        animation-delay: 9s;
+      }
+      .drift span:nth-child(4) {
+        left: 78%;
+        animation-duration: 27s;
+        animation-delay: 3s;
+      }
+      .drift span:nth-child(5) {
+        left: 92%;
+        animation-duration: 22s;
+        animation-delay: 13s;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.7;
+        }
+        88% {
+          opacity: 0.5;
+        }
+        100% {
+          transform: translateY(106vh) rotate(300deg);
+          opacity: 0;
+        }
+      }
+
+      /* ---------- Card ---------- */
+      .card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 480px;
+        padding: calc(var(--unit) * 4.5) calc(var(--unit) * 3)
+          calc(var(--unit) * 4.5);
+        background: var(--paper);
+        box-shadow:
+          0 2px 0 rgba(123, 164, 113, 0.16),
+          0 18px 44px rgba(78, 114, 71, 0.14);
+      }
+
+      /* SIGNATURE: scalloped lace edging, top and bottom */
+      .card::before,
+      .card::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 13px;
+        background-repeat: repeat-x;
+        background-size: 26px 13px;
+      }
+
+      .card::before {
+        top: -12px;
+        background-image: radial-gradient(
+          circle 13px at 13px 13px,
+          var(--paper) 12.5px,
+          transparent 13px
+        );
+      }
+
+      .card::after {
+        bottom: -12px;
+        background-image: radial-gradient(
+          circle 13px at 13px 0,
+          var(--paper) 12.5px,
+          transparent 13px
+        );
+      }
+
+      /* ---------- Profile ---------- */
+      .avatar {
+        position: relative;
+        display: block;
+        width: 124px;
+        height: 124px;
+        margin: 0 auto;
+        border-radius: 50%;
+        padding: 5px;
+        background: linear-gradient(145deg, var(--sage), var(--blush));
+      }
+
+      .avatar img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--paper);
+        background: var(--mint);
+      }
+
+      .handle {
+        margin: calc(var(--unit) * 2.25) 0 0;
+        text-align: center;
+        font-size: 27px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--green-deep);
+      }
+
+      .bio {
+        margin: calc(var(--unit) * 1) auto 0;
+        max-width: 28ch;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--ink-soft);
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--unit);
+        margin: calc(var(--unit) * 3.5) 0 calc(var(--unit) * 3);
+      }
+
+      .divider i {
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--mint);
+      }
+      .divider i:nth-child(2) {
+        width: 9px;
+        height: 9px;
+        background: var(--blush);
+      }
+
+      /* ---------- Links ---------- */
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--unit) * 1.5);
+      }
+
+      .link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: calc(var(--unit) * 2);
+        padding: calc(var(--unit) * 2.25) calc(var(--unit) * 2.5);
+        border: 2px solid var(--mint);
+        border-radius: 22px;
+        background: #fafdf7;
+        text-decoration: none;
+        color: var(--ink);
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease,
+          background-color 0.2s ease;
+      }
+
+      .link:hover,
+      .link:focus-visible {
+        transform: translateY(-2px);
+        background: #ffffff;
+        border-color: var(--sage);
+        box-shadow: 0 8px 18px rgba(78, 114, 71, 0.15);
+      }
+
+      .link:focus-visible {
+        outline: 3px solid var(--green-deep);
+        outline-offset: 3px;
+      }
+
+      .link:active {
+        transform: translateY(0);
+      }
+
+      .link-icon {
+        flex-shrink: 0;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--mint);
+        color: var(--green-deep);
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .link-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .link:hover .link-icon,
+      .link:focus-visible .link-icon {
+        background: var(--green);
+        color: #fff;
+      }
+
+      /* the one link that carries the rose accent instead of green */
+      .link.is-blush .link-icon {
+        background: var(--blush);
+        color: #a9647a;
+      }
+      .link.is-blush:hover .link-icon,
+      .link.is-blush:focus-visible .link-icon {
+        background: var(--blush-deep);
+        color: #fff;
+      }
+      .link.is-blush:hover,
+      .link.is-blush:focus-visible {
+        border-color: var(--blush-deep);
+      }
+
+      .link-text {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .link-label {
+        display: block;
+        font-weight: 700;
+        font-size: 18px;
+      }
+
+      .link-note {
+        display: block;
+        margin-top: 1px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink-soft);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .link-arrow {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        color: var(--sage);
+        transition:
+          transform 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .link:hover .link-arrow,
+      .link:focus-visible .link-arrow {
+        color: var(--green);
+        transform: translateX(3px);
+      }
+
+      /* ---------- Footer ---------- */
+      .foot {
+        margin: calc(var(--unit) * 4) 0 0;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: var(--ink-soft);
+      }
+
+      /* ---------- Larger screens ---------- */
+      @media (min-width: 480px) {
+        .card {
+          padding-left: calc(var(--unit) * 4.5);
+          padding-right: calc(var(--unit) * 4.5);
+        }
+        .avatar {
+          width: 136px;
+          height: 136px;
+        }
+        .handle {
+          font-size: 30px;
+        }
+      }
+
+      /* ---------- Accessibility ---------- */
+      @media (prefers-reduced-motion: reduce) {
+        .drift {
+          display: none;
+        }
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="drift" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- Icon sprite. Add your own <symbol> here if you need another icon. -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-instagram" viewBox="0 0 24 24">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Z"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+        <circle cx="17.5" cy="6.5" r="1.4" fill="currentColor" />
+      </symbol>
+      <symbol id="i-tiktok" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M14.2 2h2.9c.2 1.6 1.1 3 2.5 3.7.7.4 1.5.6 2.4.6v3a8 8 0 0 1-4.6-1.5v6.6a6.4 6.4 0 1 1-6.4-6.4c.3 0 .6 0 .9.06v3.06a3.4 3.4 0 1 0 2.4 3.26V2Z"
+        />
+      </symbol>
+      <symbol id="i-sheets" viewBox="0 0 24 24">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linejoin="round"
+          d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5Z"
+        />
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linejoin="round"
+          d="M14 2v5h5"
+        />
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          d="M8.5 12.5h7M8.5 16h7M12 12.5V18"
+        />
+      </symbol>
+      <!-- <symbol id="i-spotify" viewBox="0 0 24 24">
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.9"
+          stroke-linecap="round"
+          d="M7.4 9.2c3-.8 6.2-.5 8.9 1M8 12.4c2.4-.6 5-.4 7.2.8M8.6 15.5c1.9-.4 3.9-.2 5.6.7"
+        /> -->
+      <!-- </symbol> -->
+      <symbol id="i-youtube" viewBox="0 0 24 24">
+        <rect
+          x="2"
+          y="5"
+          width="20"
+          height="14"
+          rx="4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+        <path fill="currentColor" d="m10.2 9 4.8 3-4.8 3V9Z" />
+      </symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <rect
+          x="2.5"
+          y="4.5"
+          width="19"
+          height="15"
+          rx="3"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m3.5 7.5 8.5 6 8.5-6"
+        />
+      </symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M12 20.5s-7.5-4.6-7.5-9.6A4.4 4.4 0 0 1 12 8.2a4.4 4.4 0 0 1 7.5 2.7c0 5-7.5 9.6-7.5 9.6Z"
+        />
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m9 5 7 7-7 7"
+        />
+      </symbol>
+    </svg>
+
+    <main class="card">
+      <!-- Replace profile.jpg with your photo, in the same folder as this file -->
+      <span class="avatar">
+        <img
+          src="profile.jpg"
+          alt="Foto de perfil de @iamlayzita"
+          width="124"
+          height="124"
+        />
+      </span>
+
+      <h1 class="handle">@iamlayzita</h1>
+      <p class="bio">todos os meus links favoritos em um cantinho só</p>
+
+      <div class="divider" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <!-- ============================================================
+         YOUR LINKS. Copy a block to add one, delete a block to remove.
+         Change the icon by swapping the #i-name in <use>.
+         Add class="is-blush" to a link to make it rose instead of green.
+         ============================================================ -->
+      <nav class="links">
+        <!-- <a class="link" href="https://wa.me/5511999999999">
+          <span class="link-icon" aria-hidden="true"
+            ><svg><use href="#i-whatsapp" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-label">WhatsApp</span>
+            <span class="link-note">fala comigo por aqui</span>
+          </span>
+          <svg class="link-arrow" aria-hidden="true">
+            <use href="#i-arrow" />
+          </svg>
+        </a> -->
+
+        <a class="link" href="https://instagram.com/iamlayzita">
+          <span class="link-icon" aria-hidden="true"
+            ><svg><use href="#i-instagram" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-label">Instagram</span>
+            <span class="link-note">meu dia a dia</span>
+          </span>
+          <svg class="link-arrow" aria-hidden="true">
+            <use href="#i-arrow" />
+          </svg>
+        </a>
+
+        <a class="link" href="https://tiktok.com/@iamlayzita">
+          <span class="link-icon" aria-hidden="true"
+            ><svg><use href="#i-tiktok" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-label">TikTok</span>
+            <span class="link-note">vídeos novos toda semana</span>
+          </span>
+          <svg class="link-arrow" aria-hidden="true">
+            <use href="#i-arrow" />
+          </svg>
+        </a>
+
+        <a class="link" href="https://docs.google.com/spreadsheets/d/SEU_ID">
+          <span class="link-icon" aria-hidden="true"
+            ><svg><use href="#i-sheets" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-label">Planilhas</span>
+            <span class="link-note">modelos prontos pra baixar</span>
+          </span>
+          <svg class="link-arrow" aria-hidden="true">
+            <use href="#i-arrow" />
+          </svg>
+        </a>
+
+        <!-- <a class="link" href="https://open.spotify.com/user/iamlayzita">
+          <span class="link-icon" aria-hidden="true"
+            ><svg><use href="#i-spotify" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-label">Spotify</span>
+            <span class="link-note">o que eu escuto o dia inteiro</span>
+          </span>
+          <svg class="link-arrow" aria-hidden="true">
+            <use href="#i-arrow" />
+          </svg>
+        </a> -->
+
+        <a class="link is-blush" href="https://exemplo.com/loja">
+          <span class="link-icon" aria-hidden="true"
+            ><svg><use href="#i-heart" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-label">Links</span>
+            <span class="link-note">selecionados com carinho</span>
+          </span>
+          <svg class="link-arrow" aria-hidden="true">
+            <use href="#i-arrow" />
+          </svg>
+        </a>
+
+        <a class="link" href="mailto:contatolaymanfrinato@gmail.com">
+          <span class="link-icon" aria-hidden="true"
+            ><svg><use href="#i-mail" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-label">Contato</span>
+            <span class="link-note">parcerias e publi</span>
+          </span>
+          <svg class="link-arrow" aria-hidden="true">
+            <use href="#i-arrow" />
+          </svg>
+        </a>
+      </nav>
+
+      <p class="foot">lay.fyi</p>
+    </main>
+  </body>
+</html>
